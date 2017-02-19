@@ -1,0 +1,4 @@
+# dev and test
+pytest==3.0.6
+pytest-pep8==1.0.6
+pytest-flakes==1.0.1

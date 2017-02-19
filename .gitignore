@@ -1,0 +1,8 @@
+*.pyc
+*.pyo
+.coverage
+.cache
+.env
+.python-version
+/tmp
+test-results/
