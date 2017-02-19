@@ -1,7 +1,9 @@
 from collections import UserDict
+import os
 
 
 class _WordTrieNode(UserDict):
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.is_a_word = False
@@ -9,6 +11,13 @@ class _WordTrieNode(UserDict):
 
 
 class WordTrie(UserDict):
+
+    PATH_TO_DEFAULT_INGESTABLE_WORDS = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)),
+        '..',
+        'fiftyeightkwords.txt'
+    )
+
     def __init__(self):
         self.data = _WordTrieNode()
 
