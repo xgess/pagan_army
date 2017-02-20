@@ -1,8 +1,13 @@
+from pagan_army.word_trie import WordTrie
+
+
 class BasicAnagramGenerator:
 
     LETTERS_TO_IGNORE_FROM_INPUT = list(' ,.-:!?;"\'')
 
-    def __init__(self, word_data_structure, minimum_word_length=3):
+    def __init__(self, word_data_structure=None, minimum_word_length=3):
+        if not word_data_structure:
+            word_data_structure = WordTrie.from_file_of_words(WordTrie.PATH_TO_DEFAULT_INGESTABLE_WORDS)
         self.root_node = word_data_structure.root_node
         self.minimum_word_length = minimum_word_length
 
