@@ -1,11 +1,11 @@
-from pagan_army.basic_anagram_generator import BasicAnagramGenerator
+from pagan_army.unsorted_trie_anagram_generator import UnsortedTrieAnagramGenerator
 
 
 class AnagramHandler:
 
     def __init__(self, anagramee, anagram_generator=None, minimum_word_length=3):
         if not anagram_generator:
-            anagram_generator = BasicAnagramGenerator(minimum_word_length=minimum_word_length)
+            anagram_generator = UnsortedTrieAnagramGenerator(minimum_word_length=minimum_word_length)
         self.all_anagrams = anagram_generator.find(anagramee)
         self.exposable_anagrams = set()
 

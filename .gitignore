@@ -6,3 +6,5 @@
 .python-version
 /tmp
 test-results/
+.ipynb_checkpoints/
+*.ipynb

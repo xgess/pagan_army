@@ -1,7 +1,7 @@
 from pagan_army.word_trie import WordTrie
 
 
-class BasicAnagramGenerator:
+class UnsortedTrieAnagramGenerator:
 
     LETTERS_TO_IGNORE_FROM_INPUT = list(' ,.-:!?;"\'')
 
