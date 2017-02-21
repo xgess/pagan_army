@@ -10,7 +10,7 @@ next(anagrammer)
 ```
 
 
-##plan / things to do:
+##things i might continue to iterate on:
 
 ###high-level anagram behavior
 * enable the handler to have `peek_ahead_n` and `then_yield_n` with super simple internal strategy that penalizes for more words
@@ -19,11 +19,10 @@ next(anagrammer)
 * reorder anagrams on the way out to optimize for readability
 
 ###anagram generation performance
-* set up a test harness for evaluating the performance of an anagram_generator
-* get a baseline for what i currently have
-* implement letter sorting in words with a new sorted_anagram_generator and sorted_word_trie. write the dictionary to a new file as a dict for faster reads. test it.
-* implement letter sorting by letter frequency and test it.
-* implement a totally different anagram solution by simple dictionary lookups and recursive letters remaining. test it.
+* ~~set up a test harness for evaluating the performance of an anagram_generator~~
+* ~~get a baseline for what i currently have in a pretty jupyter notebook so i can come back to it later without context~~
+* implement letter sorting in words with a new sorted_anagram_generator and sorted_word_trie based on letter frequency in the dictionary (as opposed to alphabetical. write the dictionary to a new file as a dict for faster reads. test it.
+* ~~implement a totally different anagram solution by simple dictionary lookups and recursive letters remaining. test it.~~
 
 ###accessibility
 * put it in a Flask app
