@@ -1,3 +1,12 @@
+def collapse_and_sort(anagrams):
+    good_anagrams = set()
+    for anagram in anagrams:
+        words = anagram.split(' ')
+        sorted_words = ' '.join(sorted(words))
+        good_anagrams.add(sorted_words)
+    return good_anagrams
+
+
 def test_single_one_word_anagram(anagrammer):
     available_words = ['secured', 'garbage']
     anagramee = 'rescued'
@@ -5,7 +14,7 @@ def test_single_one_word_anagram(anagrammer):
 
     anagrams = anagrammer(available_words).find_all(anagramee)
 
-    assert anagrams == expected_anagrams
+    assert collapse_and_sort(anagrams) == collapse_and_sort(expected_anagrams)
 
 
 def test_multiple_one_word_anagrams(anagrammer):
@@ -15,67 +24,69 @@ def test_multiple_one_word_anagrams(anagrammer):
 
     anagrams = anagrammer(available_words).find_all(anagramee)
 
-    assert sorted(anagrams) == sorted(expected_anagrams)
+    assert collapse_and_sort(anagrams) == collapse_and_sort(expected_anagrams)
 
 
 def test_two_word_anagram(anagrammer):
     available_words = ['moon', 'starer', 'garbage']
     anagramee = 'astronomer'
-    expected_anagrams = ['moon starer', 'starer moon']
+    expected_anagrams = ['moon starer']
 
     anagrams = anagrammer(available_words).find_all(anagramee)
 
-    assert sorted(anagrams) == sorted(expected_anagrams)
+    assert collapse_and_sort(anagrams) == collapse_and_sort(expected_anagrams)
 
 
 def test_unapplicable_sub_matches(anagrammer):
     available_words = ['moon', 'starer', 'stare', 'garbage']
     anagramee = 'astronomer'
-    expected_anagrams = ['moon starer', 'starer moon']
+    expected_anagrams = ['moon starer']
 
     anagrams = anagrammer(available_words).find_all(anagramee)
 
-    assert sorted(anagrams) == sorted(expected_anagrams)
+    assert collapse_and_sort(anagrams) == collapse_and_sort(expected_anagrams)
 
 
 def test_applicable_sub_matches(anagrammer):
     available_words = ['moon', 'starer', 'stare', 'moron', 'garbage']
     anagramee = 'astronomer'
-    expected_anagrams = [
-        'moon starer',
-        'moron stare',
-        'stare moron',
-        'starer moon'
-    ]
+    minimum_word_length = 3
+    expected_anagrams = ['moon starer', 'moron stare']
 
-    anagrams = anagrammer(available_words).find_all(anagramee)
+    anagrams = anagrammer(available_words, minimum_word_length).find_all(anagramee)
 
-    assert sorted(anagrams) == sorted(expected_anagrams)
+    assert collapse_and_sort(anagrams) == collapse_and_sort(expected_anagrams)
 
 
 def test_minimum_word_length(anagrammer):
     available_words = ['moon', 'starer', 'stare', 'moron', 'garbage']
     anagramee = 'astronomer'
     minimum_word_length = 5
-    expected_anagrams = [
-        'moron stare',
-        'stare moron'
-    ]
+    expected_anagrams = ['stare moron']
 
     anagrams = anagrammer(available_words, minimum_word_length).find_all(anagramee)
 
-    assert sorted(anagrams) == sorted(expected_anagrams)
+    assert collapse_and_sort(anagrams) == collapse_and_sort(expected_anagrams)
 
 
 def test_four_word_anagram_with_spaces_in_input(anagrammer):
-    available_words = ['he', 'has', 'that', 'geometry', 'proof', 'garbage', 'red', 'herring']
-    anagramee = 'the theorem of pythagoras'
-    expected_anagram = 'he has that geometry proof'
+    available_words = ['built', 'to', 'stay', 'free', 'garbage', 'red', 'herring']
+    anagramee = 'statue of liberty'
+    expected_anagrams = ['built to stay free']
+
+    anagrams = anagrammer(available_words, minimum_word_length=2).find_all(anagramee)
+
+    assert collapse_and_sort(expected_anagrams) == collapse_and_sort(anagrams)
+
+
+def test_anagram_with_large_word(anagrammer):
+    available_words = ['naughtiness', 'drug', 'garbage']
+    anagramee = 'guinness draught'
+    expected_anagrams = ['naughtiness drug']
 
     anagrams = anagrammer(available_words).find_all(anagramee)
 
-    assert expected_anagram in anagrams
-    assert len(anagrams) == 120
+    assert collapse_and_sort(expected_anagrams) == collapse_and_sort(anagrams)
 
 
 def test_messy_input_with_capital_letters(anagrammer):
@@ -85,4 +96,4 @@ def test_messy_input_with_capital_letters(anagrammer):
 
     anagrams = anagrammer(available_words).find_all(anagramee)
 
-    assert anagrams == expected_anagrams
+    assert collapse_and_sort(expected_anagrams) == collapse_and_sort(anagrams)
